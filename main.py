@@ -9,11 +9,14 @@ import physics
 
 print(physics.getGravitationForce(1,1,1))
 
-jorden = physics.Planet(5.97*10**24, 6371000, 15, 0, 0, 0)
+brut = physics.Planet('Jorden', 5.97*10**24, 6371000, 15, 0, 0, 0)
 
 
-print(jorden.getXPosition())
+print(brut.getXPosition())
 
-jorden.setXPosition(10)
+brut.setXPosition(10)
 
-print(jorden.getXPosition())
+print(brut.getXPosition())
+
+
+print(brut.getName())
