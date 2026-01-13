@@ -9,7 +9,9 @@ import physics
 import math_util as mutil
 import animationbox
 
-
+t=0
+dt= 1
+tmax= 500
 
 print(physics.getGravitationForce(1,1,1))
 
@@ -26,8 +28,14 @@ planetList= [
 physics.gravityOnObject(planetList)
 
 
-box = animationbox.animationBox(-1000, 1000, -1000, 1000, "X", "Y", 500)
-for planet in planetList:
-    box.ax.plot(planet.XPosition, planet.XPosition, 'ro')
 
-box.show()
+box = animationbox.animationBox(-1000, 1000, -1000, 1000, "X", "Y", 500)
+box.show()  
+
+while t<tmax:
+    t=t+dt
+    
+    Jorden.setYPosition(Jorden.getYPosition()+10)
+    for planet in planetList:
+        box.ax.plot(planet.XPosition, planet.XPosition, 'ro')
+
