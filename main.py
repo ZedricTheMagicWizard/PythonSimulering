@@ -9,14 +9,14 @@ import physics
 
 print(physics.getGravitationForce(1,1,1))
 
-brut = physics.Planet('Jorden', 5.97*10**24, 6371000, 15, 0, 0, 0)
+Jorden = physics.Planet('Jorden', 5.97*10**24, 6371000, 15, 0, 0, 0)
+Mars = physics.Planet('Mars', 6.417*10**23, 3389500, 25, 5, 0, 0)
 
+planetList= [
+    Jorden, Mars
+    ]
 
-print(brut.getXPosition())
+print((Jorden.getXPosition()),':',(Jorden.getName()))
+print((Mars.getXPosition()),':', (Mars.getName()))
 
-brut.setXPosition(10)
-
-print(brut.getXPosition())
-
-
-print(brut.getName())
+physics.gravityOnObject(planetList)

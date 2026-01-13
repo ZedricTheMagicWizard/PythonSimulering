@@ -34,14 +34,25 @@ class Planet:
         self.YPosition = newPosition
     def getYPosition(self): 
         return self.YPosition
+    def getMass(self):
+        return self.masse
     
     
 def getDistance(planet1, planet2):
-    deltaX = np.absolute(planet1.getXPosition - planet2.getXPosition)
-    deltaY = np.absolute(planet1.getYPosition - planet2.getYPosition)
+    deltaX = np.absolute(planet1.getXPosition() - planet2.getXPosition())
+    deltaY = np.absolute(planet1.getYPosition() - planet2.getYPosition())
     return np.sqrt(deltaX**2 + deltaY**2)
     
-    
+def gravityOnObject(planetList):
+    for planet in planetList:
+        for anotherPlanet in planetList:
+            if planet.getName == anotherPlanet.getName:
+                continue
+            r = getDistance(planet, anotherPlanet)
+            print('Distance from:', planet.getName(), 'to', anotherPlanet.getName(), r)
+        
+            
+            
     
     
         
