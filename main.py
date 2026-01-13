@@ -7,7 +7,10 @@ Created on Tue Jan 13 13:48:27 2026
 """
 import physics
 import math_util as mutil
+import animationbox
 
+
+'''
 print(physics.getGravitationForce(1,1,1))
 
 Jorden = physics.Planet('Jorden', 5.97*10**24, 6371000, 15, 0, mutil.Vector(0,0))
@@ -19,3 +22,10 @@ planetList= [
     ]
 
 physics.gravityOnObject(planetList)
+'''
+
+box = animationbox.animationBox(-10, 10, -10, 10, "X", "Y", 500)
+
+box.ax.plot(0, 0, 'ro')
+
+box.show()
