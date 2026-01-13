@@ -11,4 +11,5 @@ Created on Tue Jan 13 13:48:14 2026
 G=6.67430*10**-11 #m^3/(kg*s^2)
 
 def getGravitationForce(m1,m2,r):
-    return G((m1*m2)/r**2)
+    return G*((m1*m2)/r**2)
+

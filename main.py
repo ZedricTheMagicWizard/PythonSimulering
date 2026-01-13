@@ -5,6 +5,8 @@ Created on Tue Jan 13 13:48:27 2026
 
 @author: madslober
 """
-print("Hello, World!")
+import physics
 
-print('Jo tak!')
+print(physics.getGravitationForce(1,1,1))
+
+
