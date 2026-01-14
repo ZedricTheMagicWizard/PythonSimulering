@@ -29,10 +29,12 @@ class Planet:
     def getName(self):
         return self.name
     def setXPosition(self, newXPosition):
+        print("Opdaterede x",newXPosition)
         self.XPosition = newXPosition
     def getXPosition(self): 
         return self.XPosition
     def setYPosition(self, newYPosition):
+        print("Opdaterede y",newYPosition)
         self.YPosition = newYPosition
     def getYPosition(self): 
         return self.YPosition

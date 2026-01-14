@@ -22,9 +22,28 @@ class animationBox:
         self.ax.set_xlabel(labelX)
         self.ax.set_ylabel(labelY)
         self.ax.set_aspect(1)
+        
+        # Gemmer planet-navn → plotobjekt Chat kode
+        self.planet_points = {}
+        
+    def add_planet(self, planet, color="ro"):
+        """Tilføj planet og tegn punktet."""
+        x = planet.getXPosition()
+        y = planet.getYPosition()
+        plot_obj, = self.ax.plot([x], [y], color)
+        self.planet_points[planet.getName()] = (planet, plot_obj)
+        plt.draw()
+
+    def update_all_planets(self):
+        """Opdater alle punkter baseret på de gemte planetobjekter"""
+        for planet, plot_obj in self.planet_points.values():
+            plot_obj.set_data([planet.getXPosition()], [planet.getYPosition()])
+        plt.draw()
+
     def show(self, block=False):
-         plt.show(block=block)
-         
+        plt.show(block=block)
+    
+    
         
 class planetPoint:
     def __init__(self, ax, planet, color='ro'):
@@ -57,6 +76,6 @@ def simulatePlanets(tMAX, planetList, dt):
             planet.setYPosition(planet.getYPosition() + planet.VelocityVector.y * dt)
                 
         t += dt
-        plt.pause(0.05)
+        plt.pause(0.5)
             
         yield planetList
