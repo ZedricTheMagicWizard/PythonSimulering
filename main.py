@@ -12,27 +12,44 @@ import matplotlib.pyplot as plt
 
 
 t=0
-tMAX= 3e7
-dt= 86400
+tMAX= 3e7*2
+dt= 43200
 
+YdreSystem = True
 
 
 #Planeter oprettes
-Jorden = physics.Planet('Jorden', 5.97e24, 637.1, 149.6e9, 0, mutil.Vector(0, 30e3))
-Mars = physics.Planet('Mars', 6.417e23, 338.95, 228e9, 0, mutil.Vector(0,24.07e3))
-Jupiter =physics.Planet('Jupiter', 1.898e27, 8991.1, 778e9, 0, mutil.Vector(0,13.1e3))
+
 Solen = physics.Planet('Solen', 1.982e30, 69634, 0, 0, mutil.Vector(0,0))
-#Solen2 = physics.Planet('Solen2',1e30, 69634,1e9, 0, mutil.Vector(0,1e5))
+Merkur = physics.Planet('Merkur', 3.285e23, 243.97e3, 57.9e9, 0, mutil.Vector(0, 47.4e3))
+Venus = physics.Planet('Venus', 4.867e24, 6051.8e3, 108.2e9, 0, mutil.Vector(0, 35.0e3))
+Jorden = physics.Planet('Jorden', 1.982e30, 6371e3, 149.6e9, 0, mutil.Vector(0, 29.78e3))
+Mars = physics.Planet('Mars', 6.417e23, 3389.5e3, 227.9e9, 0, mutil.Vector(0, 24.07e3))
+
+if YdreSystem==True:
+    Jupiter = physics.Planet('Jupiter', 1.898e27, 69911e3, 778.5e9, 0, mutil.Vector(0, 13.07e3))
+    Saturn = physics.Planet('Saturn', 5.683e26, 58232e3, 1434e9, 0, mutil.Vector(0, 9.69e3))
+    Uranus = physics.Planet('Uranus', 8.681e25, 25362e3, 2871e9, 0, mutil.Vector(0, 6.81e3))
+    Neptun = physics.Planet('Neptun', 1.024e26, 24622e3, 4495e9, 0, mutil.Vector(0, 5.43e3))
+
+ 
 
 
 #Planeter tilføjes til liste
-planetList= [
-    Jorden, Solen, Jupiter, Mars]
-
-
+if YdreSystem==False:
+    planetList= [
+    Solen, Merkur, Venus, Jorden, Mars]
+    
+else:
+    planetList= [
+      Solen, Merkur, Venus, Jorden, Mars, Jupiter, Saturn, Uranus, Neptun]
 
 #AnimationBox startes
-box = animationbox.animationBox(-100e10, 100e10, -100e10, 100e10, "X", "Y", tMAX)   
+'''if YdreSystem==False:
+    box = animationbox.animationBox(-300e9, 300e9, -300e9, 300e9, "X", "Y", tMAX)  
+     
+else:'''
+box = animationbox.animationBox(-450e10, 450e10, -450e10, 450e10, "X", "Y", tMAX)   
 #points = box.ax.plot([1,2,3], [4,5,6], "ro")
 
     
@@ -44,7 +61,7 @@ box.show(block=False)
 
 while t < tMAX:
     t = t + dt
-    plt.pause(0.1)
+    plt.pause(0.035)
     for planet in planetList:
         newVelocity = physics.getNewVelocityVector(planet, planetList, dt)
     
