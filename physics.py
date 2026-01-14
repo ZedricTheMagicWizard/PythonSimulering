@@ -40,6 +40,8 @@ class Planet:
         return self.YPosition
     def getVelocityVector(self):
         return self.VelocityVector
+    def setVelocityVector(self,newVelocityVector):
+        self.VelocityVector = newVelocityVector
     def getMass(self):
         return self.masse
     
@@ -88,16 +90,14 @@ def getAccelerationY(planet, planetList):
 
 def getVelocity(planet, planetList, dt):     
     return mutil.Vector(
-        planet.VelocityVector.x + getAccelerationX * dt,
-        planet.VelocityVector.y + getAccelerationY * dt
+        planet.VelocityVector.x + getAccelerationX(planet, planetList) * dt,
+        planet.VelocityVector.y + getAccelerationY(planet, planetList) * dt
         )
 
-def getNewPositionX(planet, dt):
-        planet.setXPosition(
-            planet.getXPosition() + planet.getVelocity.x * dt
-        )
+def getNewPositionX(planet, planetList, dt):
+    return planet.getXPosition() + planet.getVelocityVector(planet, planetList, dt).x * dt    
+
         
-def getNewPositionY(planet, dt):
-        planet.setYPosition(
-            planet.getYPosition() + planet.getVelocity.y * dt
-        )
+def getNewPositionY(planet, planetList, dt):
+    return planet.getYPosition() + planet.getVelocityVector(planet, planetList, dt).y * dt
+    
