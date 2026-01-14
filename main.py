@@ -18,7 +18,7 @@ tMAX= 100
 
 
 #Planeter oprettes
-Jorden = physics.Planet('Jorden', 0.00597, 637.1, 1, 0, mutil.Vector(0,0))
+Jorden = physics.Planet('Jorden', 0.00597, 637.1, 1, 0, mutil.Vector(5,0))
 Mars = physics.Planet('Mars', 0.0006417, 338.95, 2, 0, mutil.Vector(0,0))
 Jupiter =physics.Planet('Jupiter', 1.898, 8991.1, 3, 0, mutil.Vector(0,0))
 Solen = physics.Planet('Solen', 1989, 69634,0, 0, mutil.Vector(0,0))
@@ -43,9 +43,9 @@ box.show(block=False)
 
 
 for i in range(20):
-    Jorden.setXPosition(Jorden.getXPosition() +3)
+    Jorden.setXPosition(Jorden.getXPosition() + Jorden.getVelocityVector().x * dt)
     box.update_all_planets()
-    plt.pause(0.1)  # vent lidt, så det bevæger sig langsomt
+    plt.pause(dt)  # vent lidt, så det bevæger sig langsomt
 
 
 
