@@ -44,38 +44,3 @@ class animationBox:
         plt.show(block=block)
     
     
-        
-class planetPoint:
-    def __init__(self, ax, planet, color='ro'):
-        self.planet = planet
-        self.point, = ax.plot(
-            planet.getXPosition(),
-            planet.getYPosition(),
-            color
-        )
-
-    def update(self):
-        self.point.set_data(
-            [self.planet.getXPosition()],
-            [self.planet.getYPosition()]
-        )
-    
-def simulatePlanets(tMAX, planetList, dt):
-    t=0
-    while t<tMAX:
-        forces = physics.gravityOnObject(planetList)
-
-        for planet in planetList:
-            force = forces[planet]
-                
-            a = mutil.Vector(force.x / planet.getMass(), force.y / planet.getMass())
-
-            planet.VelocityVector = planet.VelocityVector + a * dt
-
-            planet.setXPosition(planet.getXPosition() + planet.VelocityVector.x * dt)
-            planet.setYPosition(planet.getYPosition() + planet.VelocityVector.y * dt)
-                
-        t += dt
-        plt.pause(0.5)
-            
-        yield planetList
