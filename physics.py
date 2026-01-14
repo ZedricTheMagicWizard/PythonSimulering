@@ -12,7 +12,7 @@ import numpy as np
 import math_util as mutil
 import math
 
-G= -6.67430*10**-11 #m^3/(kg*s^2)
+G= 6.67430*10**-11 #m^3/(kg*s^2)
 
 def getGravitationForce(m1,m2,r):
     return G*((m1*m2)/r**2)
@@ -29,12 +29,10 @@ class Planet:
     def getName(self):
         return self.name
     def setXPosition(self, newXPosition):
-        print("Opdaterede x",newXPosition)
         self.XPosition = newXPosition
     def getXPosition(self): 
         return self.XPosition
     def setYPosition(self, newYPosition):
-        print("Opdaterede y",newYPosition)
         self.YPosition = newYPosition
     def getYPosition(self): 
         return self.YPosition
@@ -47,13 +45,13 @@ class Planet:
     
     
 def getDistance(planet1, planet2):
-    deltaX = np.absolute(planet1.getXPosition() - planet2.getXPosition())
-    deltaY = np.absolute(planet1.getYPosition() - planet2.getYPosition())
+    deltaX = planet1.getXPosition() - planet2.getXPosition()
+    deltaY = planet1.getYPosition() - planet2.getYPosition()
     return np.sqrt(deltaX**2 + deltaY**2)
 
 def getAngle(planet1, planet2):
-    deltaX = (planet1.getXPosition() - planet2.getXPosition())
-    deltaY = (planet1.getYPosition() - planet2.getYPosition())
+    deltaX = (planet2.getXPosition() - planet1.getXPosition())
+    deltaY = (planet2.getYPosition() - planet1.getYPosition())
     return math.atan2(deltaY, deltaX)
 
 def getForceVector(angle, totalGravitationForce):
@@ -76,8 +74,7 @@ def gravityOnObject(planet, planetList):
         angle = getAngle(planet, anotherPlanet)
         
         additionalForceVector = getForceVector(angle,  gravitationalForceMagnitude)
-        totalForceVector = totalForceVector + additionalForceVector
-    print('Force Vector:', totalForceVector.x, totalForceVector.y)        
+        totalForceVector = totalForceVector + additionalForceVector        
     return totalForceVector 
 
 
