@@ -18,6 +18,10 @@ class Vector:
 
     def __sub__(self, other):
         return Vector(self.x - other.x, self.y - other.y)
+    
+    def __mul__(self, scalar):
+        return Vector(self.x * scalar, self.y * scalar)
+    __rmul__ = __mul__
 
     def dot(self, other):
         return self.x*other.x + self.y*other.y

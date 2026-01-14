@@ -12,7 +12,7 @@ import numpy as np
 import math_util as mutil
 import math
 
-G=6.67430*10**-11 #m^3/(kg*s^2)
+G= 6.67430*10**-11 #m^3/(kg*s^2)
 
 def getGravitationForce(m1,m2,r):
     return G*((m1*m2)/r**2)
@@ -32,8 +32,8 @@ class Planet:
         self.XPosition = newXPosition
     def getXPosition(self): 
         return self.XPosition
-    def setYPosition(self, newXPosition):
-        self.YPosition = newXPosition
+    def setYPosition(self, newYPosition):
+        self.YPosition = newYPosition
     def getYPosition(self): 
         return self.YPosition
     def getVelocityVector(self):
@@ -48,8 +48,8 @@ def getDistance(planet1, planet2):
     return np.sqrt(deltaX**2 + deltaY**2)
 
 def getAngle(planet1, planet2):
-    deltaX = np.absolute(planet1.getXPosition() - planet2.getXPosition())
-    deltaY = np.absolute(planet1.getYPosition() - planet2.getYPosition())
+    deltaX = (planet1.getXPosition() - planet2.getXPosition())
+    deltaY = (planet1.getYPosition() - planet2.getYPosition())
     return math.atan2(deltaX, deltaY)
 
 def getForceVector(angle, totalGravitationForce):
@@ -59,6 +59,7 @@ def getForceVector(angle, totalGravitationForce):
       
 
 def gravityOnObject(planetList):
+    totalForces = {}
     for planet in planetList:
         totalForceVector = mutil.Vector(0,0)
         for anotherPlanet in planetList:
@@ -75,12 +76,12 @@ def gravityOnObject(planetList):
             additionalForceVector = getForceVector(angle, totalGravitationForce)
             totalForceVector = totalForceVector + additionalForceVector
             
-            
-            print("Planet:", planet.getName(), "is pulled with a force of", additionalForceVector.magnitude(), "Newton by", anotherPlanet.getName())
-            
-        print("Planeten:",planet.getName(),"har en resulterende kraft på",totalForceVector.magnitude(),"med kompostanterne x:",totalForceVector.x,"y:",totalForceVector.y)
-        
-            
+        totalForces[planet] = totalForceVector
+    return totalForces
+
+
+
+
             
     
     
