@@ -54,7 +54,7 @@ def getDistance(planet1, planet2):
 def getAngle(planet1, planet2):
     deltaX = (planet1.getXPosition() - planet2.getXPosition())
     deltaY = (planet1.getYPosition() - planet2.getYPosition())
-    return math.atan2(deltaX, deltaY)
+    return math.atan2(deltaY, deltaX)
 
 def getForceVector(angle, totalGravitationForce):
     forceX = math.cos(angle) * totalGravitationForce
@@ -66,7 +66,7 @@ def getForceVector(angle, totalGravitationForce):
 def gravityOnObject(planet, planetList):
     totalForceVector = mutil.Vector(0,0)
     for anotherPlanet in planetList:
-        if planet.getName == anotherPlanet.getName:
+        if planet.getName() == anotherPlanet.getName():
             continue
         
             
@@ -77,15 +77,14 @@ def gravityOnObject(planet, planetList):
         
         additionalForceVector = getForceVector(angle,  gravitationalForceMagnitude)
         totalForceVector = totalForceVector + additionalForceVector
-            
+    print('Force Vector:', totalForceVector.x, totalForceVector.y)        
     return totalForceVector 
 
 
 def getNewAccelerationVector(planet, planetList):
     totalForceVector = gravityOnObject(planet, planetList)
-    ares = totalForceVector.magnitude() / planet.getMass()
-    ax = ares * math.cos(totalForceVector.getAngle())
-    ay = ares * math.sin(totalForceVector.getAngle())
+    ax = totalForceVector.x/planet.getMass()
+    ay = totalForceVector.y/planet.getMass()
     return mutil.Vector(ax,ay)
     
 
@@ -97,8 +96,8 @@ def getNewVelocityVector(planet, planetList, dt):
         )
 
 def getNewPositionX(planet, planetList, dt):
-    return planet.getXPosition() + getNewVelocityVector(planet, planetList, dt).x * dt    
+    return planet.getXPosition() + planet.getVelocityVector().x * dt
 
 def getNewPositionY(planet, planetList, dt):
-    return planet.getYPosition() + getNewVelocityVector(planet, planetList, dt).y * dt
+    return planet.getYPosition() + planet.getVelocityVector().y * dt
     

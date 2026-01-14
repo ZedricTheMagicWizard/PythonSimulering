@@ -12,15 +12,15 @@ import matplotlib.pyplot as plt
 
 
 t=0
-tMAX= 31557600000
-dt= 0.5
+tMAX= 3e7
+dt= 86499
 
 
 
 #Planeter oprettes
-Jorden = physics.Planet('Jorden', 5.97e24, 637.1, 149.6e9, 0, mutil.Vector(0,5))
-Mars = physics.Planet('Mars', 6.417e23, 338.95, 228e9, 0, mutil.Vector(-2,0))
-Jupiter =physics.Planet('Jupiter', 1.898e27, 8991.1, 778e9, 0, mutil.Vector(2,0))
+Jorden = physics.Planet('Jorden', 5.97e24, 637.1, 149.6e9, 0, mutil.Vector(0, 30e3))
+Mars = physics.Planet('Mars', 6.417e23, 338.95, 228e9, 0, mutil.Vector(0,0))
+Jupiter =physics.Planet('Jupiter', 1.898e27, 8991.1, 778e9, 0, mutil.Vector(0,0))
 Solen = physics.Planet('Solen', 1989e30, 69634,0, 0, mutil.Vector(0,0))
 
 
@@ -43,10 +43,16 @@ box.show(block=False)
 
 while t < tMAX:
     t = t + dt
-    plt.pause(dt)
+    plt.pause(0.5)
     for planet in planetList:
-        planet.setXPosition(physics.getNewPositionX(planet, planetList, dt))
-        planet.setYPosition(physics.getNewPositionY(planet, planetList, dt))
+        newVelocity = physics.getNewVelocityVector(planet, planetList, dt)
+    
+        # 2. Opdater position med den gamle hastighed
+        planet.setXPosition(planet.getXPosition() + planet.getVelocityVector().x * dt)
+        planet.setYPosition(planet.getYPosition() + planet.getVelocityVector().y * dt)
+    
+        # 3. Opdater hastighed
+        planet.setVelocityVector(newVelocity)
     box.update_all_planets()
 
 
