@@ -60,32 +60,44 @@ def getForceVector(angle, totalGravitationForce):
     return mutil.Vector(forceX, forceY)
       
 
-def gravityOnObject(planetList):
-    totalForces = {}
-    for planet in planetList:
-        totalForceVector = mutil.Vector(0,0)
-        for anotherPlanet in planetList:
-            if planet.getName == anotherPlanet.getName:
-                continue
-            
-            
-            
-            distance = getDistance(planet, anotherPlanet)
-            
-            totalGravitationForce = getGravitationForce(planet.getMass(),anotherPlanet.getMass(),distance)
-            angle = getAngle(planet, anotherPlanet)
-            
-            additionalForceVector = getForceVector(angle, totalGravitationForce)
-            totalForceVector = totalForceVector + additionalForceVector
-            
-        totalForces[planet] = totalForceVector
-    return totalForces
 
-
-
-
-            
-    
-    
+def gravityOnObject(planet, planetList):
+    totalForceVector = mutil.Vector(0,0)
+    for anotherPlanet in planetList:
+        if planet.getName == anotherPlanet.getName:
+            continue
         
+            
+        distance = getDistance(planet, anotherPlanet)
+        
+        gravitationalForceMagnitude = getGravitationForce(planet.getMass(),anotherPlanet.getMass(),distance)
+        angle = getAngle(planet, anotherPlanet)
+        
+        additionalForceVector = getForceVector(angle,  gravitationalForceMagnitude)
+        totalForceVector = totalForceVector + additionalForceVector
+            
+    return totalForceVector 
 
+def getAccelerationX(planet, planetList):
+    F = gravityOnObject(planet, planetList)
+    return F.x / planet.getMass()
+
+def getAccelerationY(planet, planetList):
+    F = gravityOnObject(planet, planetList)
+    return F.y / planet.getMass()
+
+def getVelocity(planet, planetList, dt):     
+    return mutil.Vector(
+        planet.VelocityVector.x + getAccelerationX * dt,
+        planet.VelocityVector.y + getAccelerationY * dt
+        )
+
+def getNewPositionX(planet, dt):
+        planet.setXPosition(
+            planet.getXPosition() + planet.getVelocity.x * dt
+        )
+        
+def getNewPositionY(planet, dt):
+        planet.setYPosition(
+            planet.getYPosition() + planet.getVelocity.y * dt
+        )
