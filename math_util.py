@@ -28,4 +28,7 @@ class Vector:
 
     def magnitude(self):
         return math.sqrt(self.x**2 + self.y**2)
+    
+    def getAngle(self):
+        return math.atan2(self.y, self.x)
 

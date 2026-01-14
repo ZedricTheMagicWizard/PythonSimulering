@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 
 
 t=0
-dt= 0.1
-tMAX= 100
+dt= 0.01
+tMAX= 10
 
 
 #Planeter oprettes

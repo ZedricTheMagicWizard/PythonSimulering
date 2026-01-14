@@ -80,24 +80,25 @@ def gravityOnObject(planet, planetList):
             
     return totalForceVector 
 
-def getAccelerationX(planet, planetList):
-    F = gravityOnObject(planet, planetList)
-    return F.x / planet.getMass()
 
-def getAccelerationY(planet, planetList):
-    F = gravityOnObject(planet, planetList)
-    return F.y / planet.getMass()
+def getNewAccelerationVector(planet, planetList):
+    totalForceVector = gravityOnObject(planet, planetList)
+    ares = totalForceVector.magnitude() / planet.getMass()
+    ax = ares * math.cos(totalForceVector.getAngle())
+    ay = ares * math.sin(totalForceVector.getAngle())
+    return mutil.Vector(ax,ay)
+    
 
-def getVelocity(planet, planetList, dt):     
+def getNewVelocityVector(planet, planetList, dt):   
+    newAccelerationVector = getNewAccelerationVector(planet, planetList)
     return mutil.Vector(
-        planet.VelocityVector.x + getAccelerationX(planet, planetList) * dt,
-        planet.VelocityVector.y + getAccelerationY(planet, planetList) * dt
+        planet.VelocityVector.x + newAccelerationVector.x * dt,
+        planet.VelocityVector.y + newAccelerationVector.y * dt
         )
 
 def getNewPositionX(planet, planetList, dt):
-    return planet.getXPosition() + planet.getVelocityVector(planet, planetList, dt).x * dt    
+    return planet.getXPosition() + getNewVelocityVector(planet, planetList, dt).x * dt    
 
-        
 def getNewPositionY(planet, planetList, dt):
-    return planet.getYPosition() + planet.getVelocityVector(planet, planetList, dt).y * dt
+    return planet.getYPosition() + getNewVelocityVector(planet, planetList, dt).y * dt
     
