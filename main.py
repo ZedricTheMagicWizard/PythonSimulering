@@ -13,26 +13,28 @@ import matplotlib.pyplot as plt
 
 t=0
 tMAX= 3e7
-dt= 86400
+dt= 3600
 
 
 
 #Planeter oprettes
-Jorden = physics.Planet('Jorden', 5.97e24, 637.1, 149.6e9, 0, mutil.Vector(0, 30e3))
-Mars = physics.Planet('Mars', 6.417e23, 338.95, 228e9, 0, mutil.Vector(0,24.07e3))
-Jupiter =physics.Planet('Jupiter', 1.898e27, 8991.1, 778e9, 0, mutil.Vector(0,13.1e3))
-Solen = physics.Planet('Solen', 1.982e30, 69634, 0, 0, mutil.Vector(0,0))
-#Solen2 = physics.Planet('Solen2',1e30, 69634,1e9, 0, mutil.Vector(0,1e5))
+Solen1 = physics.Planet('Solen1', 1e30, 6.96e10, -5e10, 0, mutil.Vector(0, 8.17e6))
+Solen2 = physics.Planet('Solen2', 1e30, 6.96e10, 5e10, 0, mutil.Vector(0, -8.17e6))
 
+'''
+Jorden = physics.Planet('Jorden', 5.97e24, 6.37e6, 1.5e11, 0, mutil.Vector(0, 3.25e4))
+Mars = physics.Planet('Mars', 6.417e23, 3.39e6, 2.28e11, 0, mutil.Vector(0, 2.40e4))
+Jupiter = physics.Planet('Jupiter', 1.898e27, 8.99e7, 7.78e11, 0, mutil.Vector(0, 1.31e4))
+'''
 
 #Planeter tilføjes til liste
 planetList= [
-    Jorden, Solen, Jupiter, Mars]
+      Solen1, Solen2] #Jupiter, Mars, Jorden,]
 
 
 
 #AnimationBox startes
-box = animationbox.animationBox(-100e10, 100e10, -100e10, 100e10, "X", "Y", tMAX)   
+box = animationbox.animationBox(-80e10, 80e10, -80e10, 80e10, "X", "Y", tMAX)   
 #points = box.ax.plot([1,2,3], [4,5,6], "ro")
 
     
