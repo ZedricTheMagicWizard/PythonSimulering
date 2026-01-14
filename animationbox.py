@@ -21,3 +21,17 @@ class animationBox:
     def show(self):
          plt.show()
         
+class planetPoint:
+    def __init__(self, ax, planet, color='ro'):
+        self.planet = planet
+        self.point, = ax.plot(
+            planet.getXPosition(),
+            planet.getYPosition(),
+            color
+        )
+
+    def update(self):
+        self.point.set_data(
+            [self.planet.getXPosition()],
+            [self.planet.getYPosition()]
+        )

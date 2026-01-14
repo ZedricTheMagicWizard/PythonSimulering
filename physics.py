@@ -28,12 +28,12 @@ class Planet:
         
     def getName(self):
         return self.name
-    def setXPosition(self, newPosition):
-        self.XPosition = newPosition
+    def setXPosition(self, newXPosition):
+        self.XPosition = newXPosition
     def getXPosition(self): 
         return self.XPosition
-    def setYPosition(self, newPosition):
-        self.YPosition = newPosition
+    def setYPosition(self, newXPosition):
+        self.YPosition = newXPosition
     def getYPosition(self): 
         return self.YPosition
     def getVelocityVector(self):
