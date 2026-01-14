@@ -12,7 +12,7 @@ import numpy as np
 import math_util as mutil
 import math
 
-G= 6.67430*10**-11 #m^3/(kg*s^2)
+G= -6.67430*10**-11 #m^3/(kg*s^2)
 
 def getGravitationForce(m1,m2,r):
     return G*((m1*m2)/r**2)
