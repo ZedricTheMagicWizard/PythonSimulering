@@ -25,6 +25,7 @@ class animationBox:
         
         # Gemmer planet-navn → plotobjekt Chat kode
         self.planet_points = {}
+        self.planet_trails = {}
         
     def add_planet(self, planet, color="ro"):
         """Tilføj planet og tegn punktet."""
@@ -33,11 +34,31 @@ class animationBox:
         plot_obj, = self.ax.plot([x], [y], color)
         self.planet_points[planet.getName()] = (planet, plot_obj)
         plt.draw()
+    
+    def add_Trail(self, planet, trail_color='r-'):
+        trail_line, = self.ax.plot([], [], trail_color, linewidth=2)
+        self.planet_trails[planet] = ([planet.getXPosition()],
+                              [planet.getYPosition()],
+                              trail_line)
+        plt.draw()
 
     def update_all_planets(self):
         """Opdater alle punkter baseret på de gemte planetobjekter"""
         for planet, plot_obj in self.planet_points.values():
             plot_obj.set_data([planet.getXPosition()], [planet.getYPosition()])
+        plt.draw()
+
+    def update_all_trails(self, maxLength=200):
+        """Opdater banespor for alle planeter"""
+        for planet, (xs, ys, line) in self.planet_trails.items():
+            xs.append(planet.getXPosition())
+            ys.append(planet.getYPosition())
+            
+            if len(xs)>maxLength:
+                xs.pop(0)
+                ys.pop(0)
+            
+            line.set_data(xs, ys)
         plt.draw()
 
     def show(self, block=False):

@@ -12,19 +12,19 @@ import matplotlib.pyplot as plt
 
 
 t=0
-tMAX= 3e7*2
+tMAX= 3e7*10
 dt= 43200
 
-YdreSystem = True
+YdreSystem = False
 
 
 #Planeter oprettes
 
-Solen = physics.Planet('Solen', 1.982e30, 69634, 0, 0, mutil.Vector(0,0))
+Solen = physics.Planet('Solen', 1.989e30, 696340, 0, 0, mutil.Vector(0,0))
 Merkur = physics.Planet('Merkur', 3.285e23, 243.97e3, 57.9e9, 0, mutil.Vector(0, 47.4e3))
 Venus = physics.Planet('Venus', 4.867e24, 6051.8e3, 108.2e9, 0, mutil.Vector(0, 35.0e3))
-Jorden = physics.Planet('Jorden', 1.982e30, 6371e3, 149.6e9, 0, mutil.Vector(0, 29.78e3))
-Mars = physics.Planet('Mars', 6.417e23, 3389.5e3, 227.9e9, 0, mutil.Vector(0, 24.07e3))
+Jorden = physics.Planet('Jorden', 5.972e24, 6371e3, 149.6e9, 0, mutil.Vector(0, 29.78e3))
+Mars = physics.Planet('Mars', 6.39e23, 3389.5e3, 227.9e9, 0, mutil.Vector(0, 24.07e3))
 
 if YdreSystem==True:
     Jupiter = physics.Planet('Jupiter', 1.898e27, 69911e3, 778.5e9, 0, mutil.Vector(0, 13.07e3))
@@ -45,16 +45,17 @@ else:
       Solen, Merkur, Venus, Jorden, Mars, Jupiter, Saturn, Uranus, Neptun]
 
 #AnimationBox startes
-'''if YdreSystem==False:
+if YdreSystem==False:
     box = animationbox.animationBox(-300e9, 300e9, -300e9, 300e9, "X", "Y", tMAX)  
      
-else:'''
-box = animationbox.animationBox(-450e10, 450e10, -450e10, 450e10, "X", "Y", tMAX)   
+else:
+    box = animationbox.animationBox(-450e10, 450e10, -450e10, 450e10, "X", "Y", tMAX)   
 #points = box.ax.plot([1,2,3], [4,5,6], "ro")
 
     
 for planet in planetList:
     box.add_planet(planet)
+    box.add_Trail(planet)
 
 box.show(block=False)  
 
@@ -72,5 +73,6 @@ while t < tMAX:
         # 3. Opdater hastighed
         planet.setVelocityVector(newVelocity)
     box.update_all_planets()
+    box.update_all_trails()
 
 
